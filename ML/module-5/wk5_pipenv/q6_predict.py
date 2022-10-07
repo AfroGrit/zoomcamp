@@ -16,6 +16,11 @@ app = Flask('Credit card issuing predictor!')
 
 @app.route('/q6_predict', methods=['POST'])
 def predict():
+  """
+  This function uses given model to predict client's credibilty 
+  before using a credi card
+  TODO: abstract prediction to separate file
+  """
   client = request.get_json()
   X = dv.transform([client])
   prediction = model.predict_proba(X)[0,1]
