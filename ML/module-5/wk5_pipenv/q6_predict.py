@@ -3,7 +3,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 
-model_file = 'model1.bin'
+model_file = 'model2.bin'
 dv_file = 'dv.bin'
 
 with ( 
@@ -12,22 +12,21 @@ with (
   model = pickle.load(model)
   dv = pickle.load(dv)
 
-app = Flask('issue_CC')
+app = Flask('Credit card issuing predictor!')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/q6_predict', methods=['POST'])
 def predict():
   client = request.get_json()
-  # transform client into feature matrix
   X = dv.transform([client])
   prediction = model.predict_proba(X)[0,1]
-  churn = prediction >= 0.5
+  credit_card = prediction >= 0.5
 
   result = {
-      'issue_CC_probability': float(prediction),
-      'issue_CC': bool(churn)
+      'Client credibilty': float(prediction),
+      'issue Credit Card': bool(credit_card)
   }
 
   return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=9696)  
+    app.run(debug=True, host='0.0.0.0', port=9697)  
