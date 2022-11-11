@@ -1,0 +1,13 @@
+service: "uv_radiation_service.py:svc"
+
+labels:
+  owner: luke
+  project: uv_radiation classifier
+
+include:
+  - "*.py"
+
+python:
+  packages:
+    - xgboost
+    - sklearn  
