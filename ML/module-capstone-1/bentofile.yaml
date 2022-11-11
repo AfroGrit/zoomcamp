@@ -10,4 +10,5 @@ include:
 python:
   packages:
     - xgboost
-    - sklearn  
+    - scikit-learn
+    - pydantic
